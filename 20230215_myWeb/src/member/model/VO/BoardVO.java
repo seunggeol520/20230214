@@ -15,8 +15,17 @@ public class BoardVO {
 	private int id;
 	private int num;
 	private String user;
+	private String pw;
 	private String context;
 	private Date date;
+	
+	public String getPw() {
+		return pw;
+	}
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
 	
 	public void setDate(Date date) {
 		this.date = date;
@@ -48,8 +57,8 @@ public class BoardVO {
 	
 	@Override
 	public String toString() {
-		return "BoardVO [id=" + id + ", num=" + num + ", user=" + user + ", context=" + context + ", date=" + date
-				+ "]";
+		return "BoardVO [id=" + id + ", num=" + num + ", user=" + user + ", pw=" + pw + ", context=" + context
+				+ ", date=" + date + "]";
 	}
 	
 	

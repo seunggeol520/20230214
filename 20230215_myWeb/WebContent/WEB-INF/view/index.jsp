@@ -11,6 +11,7 @@
 <body>	
 	
 	<jsp:include page="/WEB-INF/view/board/boardList.jsp"/>
+	<jsp:include page="/WEB-INF/view/board/boardInsert.jsp"/>
 		
 		
 </body>

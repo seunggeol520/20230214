@@ -6,7 +6,7 @@
 	<h1>게시판</h1>
 	<c:forEach var="list" items="${boardList}">
 		<div>
-			${list.num }  |  ${list.user }  |  ${list.context } 
+			${list.num }  |  ${list.user }  |  ${list.context }
 		</div>
 		<hr/>
 	</c:forEach>
