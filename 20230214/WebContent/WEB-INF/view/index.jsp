@@ -12,8 +12,10 @@
 	<jsp:include page="/WEB-INF/view/header.jsp"/>
 	
 	<c:if test="${not empty loginSession }">
-		<button>내정보 보기</button>
+		<button class="btn myinfo">내정보 보기</button>
 	</c:if>
+	
+	<jsp:include page="/WEB-INF/view/board/boardList.jsp"/>
 	
 	<script>
 		$(".btn.login").on("click", handlerClickBtnLogin);

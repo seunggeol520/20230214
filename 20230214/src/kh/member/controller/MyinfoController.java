@@ -41,7 +41,9 @@ public class MyinfoController extends HttpServlet {
 		if(id != null) {
 			request.setAttribute("myinfo",new MemberService().myinfo(id));
 		} else {
-			
+			//로그인 정보가 없을 때, 하나의 error page 
+			request.setAttribute("errorMsg", "로그인되지 않아 정보를 확인할 수 없습니다.");
+			request.getRequestDispatcher("/WEB-INF/view/error/errorLogin.jsp").forward(request, response);
 		}
 		
 		

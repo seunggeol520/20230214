@@ -11,8 +11,9 @@ public class MemberService {
 	
 	public MemberVO myinfo(String id) {
 		MemberVO result = null;
-		
-		
+		Connection conn = getConnection();
+		result = new MemberDAO().myinfo(conn, id);
+		close(conn);
 		return result;
 	}
 	
@@ -39,5 +40,6 @@ public class MemberService {
 		
 		return result;
 	}
+
 
 }

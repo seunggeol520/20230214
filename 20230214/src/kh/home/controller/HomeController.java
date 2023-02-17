@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.board.model.service.BoardService;
+
 /**
  * Servlet implementation class HomeController
  */
-@WebServlet("/index")
+@WebServlet({"/", "/main", "/index", "/home"})
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,6 +27,10 @@ public class HomeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("1");
+		//2.DB 
+		request.setAttribute("boardList", new BoardService().getBoardList());
+		//DTO, DAO, SERVICE, CONTROLLER, VIEW
 		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 	}
 
