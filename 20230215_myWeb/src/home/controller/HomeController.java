@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.VO.BoardVO;
+import member.model.service.BoardService;
 
 /**
  * Servlet implementation class HomeController
  */
-@WebServlet("/index")
+@WebServlet({"/", "/main", "/index", "/home"})
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,11 +31,9 @@ public class HomeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("boardList", new BoardService().selectAll());
 		
-		List<BoardVO> boardList = new ArrayList<BoardVO>();
-		request.setAttribute("boardList", boardList);
-		
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 	}
 
 }

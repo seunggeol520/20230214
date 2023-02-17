@@ -16,9 +16,9 @@ public class BoardVO {
 	private int num;
 	private String user;
 	private String context;
-	private String date;
+	private Date date;
 	
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public int getId() {

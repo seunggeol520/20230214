@@ -1,12 +1,13 @@
 package member.model.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import static common.jdbc.JdbcTemplate.*;
+import common.jdbc.JdbcTemplate;
 import member.model.VO.BoardVO;
 
 public class BoardDAO {
@@ -21,36 +22,33 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				result = new ArrayList<BoardVO>();
-				do {
-					String num = rs.getString("B_NUM");
+			result = new ArrayList<BoardVO>();
+				while(rs.next()) {
+					int num = rs.getInt("B_NUM");
 					String user = rs.getString("B_USER");
 					String context = rs.getString("B_CONTEXT");
-					String date = rs.getString("B_DATE");
+					Date date = rs.getDate("B_DATE");
 					
 					BoardVO vo = new BoardVO();
 					
-					vo.setNum(Integer.parseInt(num));
+					vo.setNum(num);
 					vo.setUser(user);
 					vo.setContext(context);
 					vo.setDate(date);
 					
+					result.add(vo);
 					
-				} while(rs.next());
+				} 
 				
-			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
 			
-			close(rs);
-			close(pstmt);
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
 		}
 		
-		System.out.println(result);
 		return result;
 	}
 
