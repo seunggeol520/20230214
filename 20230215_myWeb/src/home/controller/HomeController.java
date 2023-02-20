@@ -13,7 +13,7 @@ import member.model.service.BoardService;
 /**
  * Servlet implementation class HomeController
  */
-@WebServlet({"/", "/main", "/index", "/home"})
+@WebServlet({"/main", "/index", "/home"})
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

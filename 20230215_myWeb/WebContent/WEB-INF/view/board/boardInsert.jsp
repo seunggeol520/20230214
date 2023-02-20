@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,8 @@
 		<input type="password" name="pw"/><br>
 		<label>제목: </label>
 		<input type="text" name="title"/><br>
-		<label>내용: </label>
+		<br>
+		<label style="text-align: center">내용: </label>
 		<textarea name="context" cols="30" rows="5"></textarea><br>
 		<button type="submit">등록</button>
 	</form>
