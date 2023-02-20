@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.VO.BoardVO;
+import member.model.service.BoardService;
 
 /**
  * Servlet implementation class InsertController
@@ -35,16 +36,30 @@ public class InsertController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("a");
+		BoardService service = new BoardService();
 		
 		String user = request.getParameter("user");
 		String pw = request.getParameter("pw");
-		String context = request.getParameter("pw");
+		String title = request.getParameter("title");
+		String context = request.getParameter("context");
 		
 		BoardVO vo = new BoardVO();
 		
 		vo.setUser(user);
 		vo.setPw(pw);
+		vo.setTitle(title);
 		vo.setContext(context);
+		
+		int result = service.boardInsert(vo);
+		
+		if(result == 1) {
+			System.out.println(result);
+			response.sendRedirect("index.jsp");
+		} else {
+			System.out.println(result);
+			request.getRequestDispatcher("/WEB-INF/view/board/boardInsert.jsp").forward(request, response);
+		}
 		
 	}
 

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +7,15 @@
 </head>
 <body>
 	
-	<form action="/insert" method="post">
+	<form action="<%=request.getContextPath()%>/insert" method="post">
 		<label>작성자: </label>
-		<input type="text" name="user"/>
+		<input type="text" name="user"/><br>
 		<label>비밀번호: </label>
-		<input type="password" name="pw"/>
+		<input type="password" name="pw"/><br>
+		<label>제목: </label>
+		<input type="text" name="title"/><br>
 		<label>내용: </label>
-		<input type="text" name="context"/>
+		<textarea name="context" cols="30" rows="5"></textarea><br>
 		<button type="submit">등록</button>
 	</form>
 	

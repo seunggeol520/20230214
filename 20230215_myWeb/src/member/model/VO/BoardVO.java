@@ -16,8 +16,20 @@ public class BoardVO {
 	private int num;
 	private String user;
 	private String pw;
+	private String title;
 	private String context;
 	private Date date;
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Date getDate() {
+		return date;
+	}
+
 	
 	public String getPw() {
 		return pw;
@@ -57,8 +69,8 @@ public class BoardVO {
 	
 	@Override
 	public String toString() {
-		return "BoardVO [id=" + id + ", num=" + num + ", user=" + user + ", pw=" + pw + ", context=" + context
-				+ ", date=" + date + "]";
+		return "BoardVO [id=" + id + ", num=" + num + ", user=" + user + ", pw=" + pw + ", title=" + title
+				+ ", context=" + context + ", date=" + date + "]";
 	}
 	
 	

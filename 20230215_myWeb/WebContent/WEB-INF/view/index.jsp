@@ -11,8 +11,15 @@
 <body>	
 	
 	<jsp:include page="/WEB-INF/view/board/boardList.jsp"/>
-	<jsp:include page="/WEB-INF/view/board/boardInsert.jsp"/>
+	
+	<button class="insert">글작성</button>
+	<!-- jsp:include page="/WEB-INF/view/board/boardInsert.jsp"/ -->
 		
-		
+		<script>
+			$(".insert").on("click", function(){
+				location.href="<%=request.getContextPath()%>/insert";
+			});
+			
+		</script>
 </body>
 </html>

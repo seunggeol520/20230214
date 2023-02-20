@@ -19,5 +19,13 @@ public class BoardService {
 		
 		return result;
 	}
+
+	public int boardInsert(BoardVO vo) {
+		Connection conn = JdbcTemplate.getConnection();
+		BoardDAO dao = new BoardDAO();
+		int result = dao.boardInsert(conn, vo); 
+		JdbcTemplate.close(conn);
+		return result;
+	}
 	
 }
