@@ -17,7 +17,7 @@
 			<td>${list.num }</td>
 			<td>${list.user }</td>
 			<td>${list.title }</td>
-			<td><button class="context">상세내용</button></td>
+			<td><button class="context">상세보기</button></td>
 			<td>${list.date }</td>
 		</tr>
 	</c:forEach>
@@ -25,7 +25,6 @@
 		
 		<script>
 			$(".context").on("click", function(){
-				
 				
 				location.href="<%=request.getContextPath()%>/myinfo";
 			});
