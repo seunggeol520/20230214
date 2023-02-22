@@ -10,6 +10,7 @@
 	<button onclick="location.href='<%=request.getContextPath()%>/index'">Home</button>
 	
 	<form action="<%=request.getContextPath()%>/insert" method="post">
+		<h4>번호</h4><br>
 		<label>작성자: </label>
 		<input type="text" name="user"/><br>
 		<label>비밀번호: </label>
