@@ -12,7 +12,7 @@
 	
 	<jsp:include page="/WEB-INF/view/board/boardList.jsp"/>
 	
-	<button class="insert">글작성</button>
+	<button class="insert">글등록</button>
 	<!-- jsp:include page="/WEB-INF/view/board/boardInsert.jsp"/ -->
 		
 		<script>

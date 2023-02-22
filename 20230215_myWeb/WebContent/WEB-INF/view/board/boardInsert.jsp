@@ -7,6 +7,7 @@
 <title>글 작성 페이지</title>
 </head>
 <body>
+	<button onclick="location.href='<%=request.getContextPath()%>/index'">Home</button>
 	
 	<form action="<%=request.getContextPath()%>/insert" method="post">
 		<label>작성자: </label>
@@ -15,9 +16,10 @@
 		<input type="password" name="pw"/><br>
 		<label>제목: </label>
 		<input type="text" name="title"/><br>
-		<br>
-		<label style="text-align: center">내용: </label>
+		<div>
+		<label>내용: </label>
 		<textarea name="context" cols="30" rows="5"></textarea><br>
+		</div>
 		<button type="submit">등록</button>
 	</form>
 	

@@ -36,7 +36,6 @@ public class InsertController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("a");
 		BoardService service = new BoardService();
 		
 		String user = request.getParameter("user");
@@ -52,12 +51,9 @@ public class InsertController extends HttpServlet {
 		vo.setContext(context);
 		
 		int result = service.boardInsert(vo);
-		
 		if(result == 1) {
-			System.out.println(result);
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("index");
 		} else {
-			System.out.println(result);
 			request.getRequestDispatcher("/WEB-INF/view/board/boardInsert.jsp").forward(request, response);
 		}
 		

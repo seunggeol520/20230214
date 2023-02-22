@@ -15,7 +15,7 @@ public class BoardDAO {
 	public List<BoardVO> selectAll(Connection conn) {
 		
 		List<BoardVO> result = null;
-		String sql = "SELECT B_NUM, B_USER, B_CONTEXT, B_TITLE, B_DATE FROM BOARD_TBL ORDER BY B_DATE DESC";
+		String sql = "SELECT B_NUM, B_USER, B_TITLE, B_CONTEXT, B_DATE FROM BOARD_TBL ORDER BY B_DATE DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -83,7 +83,6 @@ public class BoardDAO {
 			JdbcTemplate.close(rs);
 			JdbcTemplate.close(pstmt);
 		}
-		
 		return result;
 	}
 
