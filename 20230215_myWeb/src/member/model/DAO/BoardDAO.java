@@ -70,9 +70,41 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getUser());
-			pstmt.setString(4, vo.getPw());
-			pstmt.setString(2, vo.getTitle());
-			pstmt.setString(3, vo.getContext());
+			pstmt.setString(2, vo.getPw());
+			pstmt.setString(3, vo.getTitle());
+			pstmt.setString(4, vo.getContext());
+			rs = pstmt.executeQuery();
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardUpdate(Connection conn, BoardVO vo) {
+		int result = 0;
+		String sql = "update BOARD_TBL set "
+				+ "B_USER = ?,"
+				+ "B_PW = ?,"
+				+ "B_TITLE = ?,"
+				+ "B_CONTEXT = ?,"
+				+ "B_DATE = default "
+				+ "where B_NUM = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUser());
+			pstmt.setString(2, vo.getPw());
+			pstmt.setString(3, vo.getTitle());
+			pstmt.setString(4, vo.getContext());
+			pstmt.setInt(5, vo.getNum());
 			rs = pstmt.executeQuery();
 			result = pstmt.executeUpdate();
 			

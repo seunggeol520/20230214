@@ -16,6 +16,8 @@
 	
 	
 	<button class="update">수정</button>
+	
+	<!-- hidden button 삭제 저장-->
 	<button class="delete">삭제</button>
 	<button class="save">저장</button>
 	
