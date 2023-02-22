@@ -25,6 +25,8 @@
 		
 		<script>
 			$(".context").on("click", function(){
+				
+				
 				location.href="<%=request.getContextPath()%>/myinfo";
 			});
 			

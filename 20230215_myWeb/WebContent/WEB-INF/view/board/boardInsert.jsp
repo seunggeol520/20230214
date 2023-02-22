@@ -16,10 +16,8 @@
 		<input type="password" name="pw"/><br>
 		<label>제목: </label>
 		<input type="text" name="title"/><br>
-		<div>
-		<label>내용: </label>
+		<label>내용</label><br>
 		<textarea name="context" cols="30" rows="5"></textarea><br>
-		</div>
 		<button type="submit">등록</button>
 	</form>
 	
