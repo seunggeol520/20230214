@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace="board"/>
-  
-  <insert id="insert" parameterType="kh.spring.s01.board.model.vo.BoardVo">
+<mapper namespace="board">
+
+<insert id="insert" resultType="kh.spring.s01.board.model.vo.BoardVo" parameterType="kh.spring.s01.board.model.vo.BoardVo">
 	INSERT INTO BOARD VALUES(
     (SELECT NVL(MAX(BOARD_NUM), 0)+ 1 FROM BOARD),
     #{boardTitle},
@@ -19,7 +17,7 @@
 )
 </insert>
 
-<update id="update" parameterType="kh.spring.s01.board.model.vo.BoardVo">
+<update id="update" resultType="kh.spring.s01.board.model.vo.BoardVo" parameterType="kh.spring.s01.board.model.vo.BoardVo">
 	UPDATE BOARD SET
 	BOARD_TITLE = #{boardTitle},
 	BOARD_WRITER = #{boardWriter},
@@ -28,20 +26,20 @@
 	WHERE BOARD_NUM = #{boardNum}
 </update>
 
-<update id="updateReadCount" parameterType="_int">
+<update id="updateReadCount" resultType="_int" parameterType="_int">
 	UPDATE BOARD SET
 	BOARD_READCOUNT = #{boardReadcount}
 	WHERE BOARD_NUM = #{boardNum}
 </update>
 
-<update id="updateForReply" parameterType="_int">
+<update id="updateForReply" resultType="_int" parameterType="_int">
 	UPDATE BOARD
 	SET BOARD_REPLY_SEQ = BOARD_REPLY_SEQ + 1 
 	WHERE BOARD_REPLY_SEQ > (SELECT BOARD_REPLY_SEQ FROM BOARD WHERE BOARD_NUM = #{boardNum})
 	AND BOARD_REF = (SELECT BOARD_REF FROM BOARD WHERE BOARD_NUM = #{boardNum})
 </update>
 
-<delete id="delete" parameterType="_int">
+<delete id="delete" resultType="_int" parameterType="_int">
 	DELETE FROM BOARD WHERE BOARD_NUM = #{boardNum}
 </delete>
 
@@ -56,4 +54,5 @@
 <select id="selectOneCount" resultType="_int">
 	SELECT COUNT(*) CNT FROM BOARD 
 </select>
+
 </mapper>
