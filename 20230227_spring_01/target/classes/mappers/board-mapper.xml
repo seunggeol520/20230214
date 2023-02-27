@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="board">
+
+<insert id="insert" resultType="kh.spring.s01.board.model.vo.BoardVo" parameterType="kh.spring.s01.board.model.vo.BoardVo">
+	INSERT INTO BOARD VALUES(
+    (SELECT NVL(MAX(BOARD_NUM), 0)+ 1 FROM BOARD),
+    #{boardTitle},
+    #{boardWriter},
+    #{boardContent},
+    #{boardOriginalFileName},
+    #{boardRenameFileName},
+    DEFAULT,
+    DEFAULT,
+    (SELECT NVL(MAX(BOARD_NUM), 0)+ 1 FROM BOARD),
+    DEFAULT,
+    DEFAULT
+)
+</insert>
+
+<update id="update" resultType="kh.spring.s01.board.model.vo.BoardVo" parameterType="kh.spring.s01.board.model.vo.BoardVo">
+	UPDATE BOARD SET
+	BOARD_TITLE = #{boardTitle},
+	BOARD_WRITER = #{boardWriter},
+	BOARD_CONTENT = #{boardContent},
+	BOARD_DATE = SYSDATE,
+	WHERE BOARD_NUM = #{boardNum}
+</update>
+
+<update id="updateReadCount" resultType="_int" parameterType="_int">
+	UPDATE BOARD SET
+	BOARD_READCOUNT = #{boardReadcount}
+	WHERE BOARD_NUM = #{boardNum}
+</update>
+
+<update id="updateForReply" resultType="_int" parameterType="_int">
+	UPDATE BOARD
+	SET BOARD_REPLY_SEQ = BOARD_REPLY_SEQ + 1 
+	WHERE BOARD_REPLY_SEQ > (SELECT BOARD_REPLY_SEQ FROM BOARD WHERE BOARD_NUM = #{boardNum})
+	AND BOARD_REF = (SELECT BOARD_REF FROM BOARD WHERE BOARD_NUM = #{boardNum})
+</update>
+
+<delete id="delete" resultType="_int" parameterType="_int">
+	DELETE FROM BOARD WHERE BOARD_NUM = #{boardNum}
+</delete>
+
+<select id="selectOne" resultType="_int" parameterType="_int">
+	SELECT * FROM BOARD WHERE BOARD_NUM = #{boardNum}
+</select>
+
+<select id="selectList" resultType="kh.spring.s01.board.model.vo.BoardVo">
+	SELECT * FROM BOARD 
+</select>
+
+<select id="selectOneCount" resultType="_int">
+	SELECT COUNT(*) CNT FROM BOARD 
+</select>
+
+</mapper>
