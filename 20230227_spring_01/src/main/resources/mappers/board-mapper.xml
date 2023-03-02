@@ -2,6 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
   
+  <resultMap type="bvo" id="bvoMap">
+  	<id column="BOARD_NUM" property="boardNum"/>
+  	<result column="BOARD_TITLE" property="boardTitle"/>
+  	<result column="BOARD_WRITER" property="boardWriter"/>
+  	<result column="BOARD_CONTENT" property="boardContent"/>
+  	<result column="BOARD_ORIGINAL_FILENAME" property="boardOriginalFileName"/>
+  	<result column="BOARD_RENAME_FILENAME" property="boardRenameFileName"/>
+  	<result column="BOARD_DATE" property="boardDate"/>
+  	<result column="BOARD_LEVEL" property="boardLevel"/>
+  	<result column="BOARD_REF" property="boardRef"/>
+  	<result column="BOARD_REPLY_SEQ" property="boardRdplySeq"/>
+  	<result column="BOARD_READCOUNT" property="boardReadcount"/>
+  </resultMap>
+  
+  <resultMap type="hashmap" id="rsMap">
+  	<result column="sdate" property="boardDate"/>
+  	<result column="board_num" property="boardVo"/>
+  </resultMap>
+  
+  <select id="tempSelect" resultMap="rsMap">
+  	select sysdate as sdate, board_num from board
+  </select>
+  
+  <select id="tempCallableSelect"
+		  statementType="CALLABLE"
+ 		  parameterType="bvo"
+ 		  resultType="bvo">
+  { CALL f1() }
+  </select>
+  
   <insert id="insert" parameterType="kh.spring.s01.board.model.vo.BoardVo">
 	INSERT INTO BOARD VALUES(
     (SELECT NVL(MAX(BOARD_NUM), 0)+ 1 FROM BOARD),
@@ -40,14 +70,14 @@
 	</if>
 		BOARD_RENAME_FILENAME = 
 	<choose>
-		<when test="boardOriginalFileName != null and !boardOriginalFileName.equals('')">
-			#{boardRenameFileName},
+		<when test="boardRenameFileName != null and !boardRenameFileName.equals('')">
+			#{boardRenameFileName}
 		</when>
 		<otherwise>
-			NULL,
+			NULL
 		</otherwise>
 	</choose>
-	BOARD_DATE = SYSDATE,
+	,BOARD_DATE = SYSDATE,
 	WHERE BOARD_NUM = #{boardNum}
 </update>
 
@@ -72,7 +102,7 @@
 	SELECT * FROM BOARD WHERE BOARD_NUM = #{boardNum}
 </select>
 
-<select id="selectList" resultType="kh.spring.s01.board.model.vo.BoardVo">
+<select id="selectList" resultMap="bvoMap">
 	select
 		BOARD_TITLE ,
 		BOARD_WRITER,

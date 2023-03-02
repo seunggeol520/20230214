@@ -9,11 +9,11 @@
 </head>
 <body>
 <c:forEach items="${boardList }" var="board">
-	${board.boardNum };
+	${board.boardNum }
 </c:forEach>
 	<hr>
 	<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.startPage}">
-		${pageInfo.boardNum };
+		${pageInfo.boardNum }
 	</c:forEach>
 	
 

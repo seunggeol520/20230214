@@ -1,5 +1,6 @@
 package kh.spring.s01.board.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -57,6 +58,21 @@ public class BoardDao {
 //		RowBounds rb = new RowBounds(offset, BoardController.BOARD_LIMIT);
 //		return sqlSession.selectList("board.selectList", null, rb);
 		return sqlSession.selectList("board.selectList", null, new RowBounds((currentPage-1)*limit, limit));
+	}
+	
+//	public List<HashMap<String , Object>> tempSelect() {
+//		List<HashMap<String , Object>> listmap = sqlSession.selectList("board.tempSelect");
+//		for(HashMap<String , Object> map : listmap) {
+//			System.out.println((String)map.get("boardDate"));
+//		}
+//		return listmap;
+//	}
+	public List<BoardVo> tempSelect() {
+		List<BoardVo> listmap = sqlSession.selectList("board.tempSelect");
+		for(List<BoardVo> vo : listmap) {
+			System.out.println(vo);
+		}
+		return listmap;
 	}
 	
 	public int selectOneCount() {
