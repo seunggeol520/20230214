@@ -13,7 +13,7 @@
 </c:forEach>
 	<hr>
 	<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.startPage}">
-		${pageInfo.boardNum }
+		${page }
 	</c:forEach>
 	
 

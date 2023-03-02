@@ -32,6 +32,27 @@
   { CALL f1() }
   </select>
   
+  <select id="tempTrimSelect">
+  select * from board
+  	<trim prefix="where" prefixOverrides="AND/OR">
+ 		 <if test="searchWord != null and searchWord neq ''">
+ 		 	title like #{searchWord}
+ 		 	OR content like #{searchWord}
+ 		 </if>
+  	</trim>
+  </select>
+  
+  <delete id="">
+  	delete from board 
+  	<where>
+  		1=0 or
+  		<foreach collection="list" item="bnum" open="board_num in (" close=")" separator=",">
+  			#{bnum}
+  		</foreach>
+  	</where>
+  </delete>
+  
+  
   <insert id="insert" parameterType="kh.spring.s01.board.model.vo.BoardVo">
 	INSERT INTO BOARD VALUES(
     (SELECT NVL(MAX(BOARD_NUM), 0)+ 1 FROM BOARD),
@@ -117,5 +138,11 @@
 
 <select id="selectOneCount" resultType="_int">
 	SELECT COUNT(*) CNT FROM BOARD 
+	<trim prefix="where" prefixOverrides="AND/OR">
+ 		 <if test="searchWord != null and searchWord neq ''">
+ 		 	title like #{searchWord}
+ 		 	OR content like #{searchWord}
+ 		 </if>
+  	</trim>
 </select>
 </mapper>

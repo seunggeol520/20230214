@@ -60,20 +60,20 @@ public class BoardDao {
 		return sqlSession.selectList("board.selectList", null, new RowBounds((currentPage-1)*limit, limit));
 	}
 	
-//	public List<HashMap<String , Object>> tempSelect() {
-//		List<HashMap<String , Object>> listmap = sqlSession.selectList("board.tempSelect");
-//		for(HashMap<String , Object> map : listmap) {
-//			System.out.println((String)map.get("boardDate"));
-//		}
-//		return listmap;
-//	}
-	public List<BoardVo> tempSelect() {
-		List<BoardVo> listmap = sqlSession.selectList("board.tempSelect");
-		for(List<BoardVo> vo : listmap) {
-			System.out.println(vo);
+	public List<HashMap<String , Object>> tempSelect() {
+		List<HashMap<String , Object>> listmap = sqlSession.selectList("board.tempSelect");
+		for(HashMap<String , Object> map : listmap) {
+			System.out.println((String)map.get("boardDate"));
 		}
 		return listmap;
 	}
+//	public List<BoardVo> tempSelect() {
+//		List<BoardVo> listmap = sqlSession.selectList("board.tempSelect");
+//		for(List<BoardVo> vo : listmap) {
+//			System.out.println(vo);
+//		}
+//		return listmap;
+//	}
 	
 	public int selectOneCount() {
 		return sqlSession.selectOne("board.selectOneCount");
