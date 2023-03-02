@@ -2,11 +2,12 @@ package kh.spring.s01.board.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import kh.spring.s01.board.controller.BoardController;
 import kh.spring.s01.board.model.vo.BoardVo;
 
 @Repository
@@ -47,6 +48,15 @@ public class BoardDao {
 	public List<BoardVo> selectList() {
 		
 		return sqlSession.selectList("board.selectList");
+	}
+	
+	public List<BoardVo> selectList(int currentPage, int limit) {
+//		int offset = (currentPage - 1) * limit;
+//		RowBounds rb = new RowBounds(offset, limit);
+//		int offset = (currentPage - 1) * BoardController.BOARD_LIMIT;
+//		RowBounds rb = new RowBounds(offset, BoardController.BOARD_LIMIT);
+//		return sqlSession.selectList("board.selectList", null, rb);
+		return sqlSession.selectList("board.selectList", null, new RowBounds((currentPage-1)*limit, limit));
 	}
 	
 	public int selectOneCount() {

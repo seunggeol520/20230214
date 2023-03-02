@@ -23,6 +23,15 @@
 	
 	<context:component-scan base-package="kh.spring.s01" />
 	
+	<!-- 
+		@Bean
+		@Component
+		@Service
+		@Repository
+		
+		
+		@Controller
 	
+	 -->
 	
 </beans:beans>

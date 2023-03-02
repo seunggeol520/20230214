@@ -21,14 +21,39 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	private final static int BOARD_LIMIT = 5;
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void viewListBoard(Model model) {
-		model.addAttribute("boardList", service.selectList());
+	public ModelAndView viewListBoard(ModelAndView mv) {
+		
+		int currentPage = 1;
+		
+		
+		mv.addObject("boardList", service.selectList(currentPage, BOARD_LIMIT));
+		mv.setViewName("bosrd/list");
+		
+		return mv;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public void viewUpdateBoard() {
 		
+	}
+	
+	@PostMapping("/update")
+	public void updateBoard() {
+		int boardNum = 1;
+		String boardTitle = "수정제목";
+		String boardContent = "수정내용";
+		String boardOriginalFileName = "";  //값 = "" 파일없음
+		String boardRenameFileName = "";    //값 = "" 파일없음
+		
+		BoardVo vo = new BoardVo();
+		vo.setBoardTitle(boardTitle);
+		vo.setBoardContent(boardContent);
+		vo.setBoardOriginalFileName(boardOriginalFileName);
+		vo.setBoardRenameFileName(boardRenameFileName);
+		service.update(vo);
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -49,9 +74,9 @@ public class BoardController {
 			HttpSession session, 
 			BoardVo vo) {
 		
-//		mv.addObject("test", "testValue");
+		mv.addObject("test", "testValue");
 		
-//		mv.setViewName("/insert");
+		mv.setViewName("/board/insert");
 		
 		return mv;
 	}
@@ -63,6 +88,31 @@ public class BoardController {
 		return mv;
 	}
 	
+	
+	@GetMapping("/insertReply")
+	public ModelAndView viewInsertReply(ModelAndView mv
+			, int boardNum  // 몇번글에 답글인
+			) {
+		
+		
+		return mv;
+	}
+	
+	@PostMapping("/insertReply")
+	public ModelAndView viewInsertReply(ModelAndView mv
+			, BoardVo vo  // 몇번글에 답글인
+			) {
+		int boardNum = 4;
+		vo.setBoardNum(boardNum);
+		
+		vo.setBoardContent("임시답내용");
+		vo.setBoardTitle("임시답제목");
+		vo.setBoardWriter("user22");
+		
+		service.insert(vo);
+		
+		return mv;
+	}
 	
 //	get/post 모두 적용
 	@RequestMapping("/test")

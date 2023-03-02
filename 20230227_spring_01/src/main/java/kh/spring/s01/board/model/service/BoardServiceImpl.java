@@ -17,7 +17,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int insert(BoardVo vo) {
-		// TODO Auto-generated method stub
+		if(vo.getBoardNum() != 0) {
+			// 답글 /원글은 0
+			dao.updateForReply(vo.getBoardNum());
+		}
 		return dao.insert(vo);
 	}
 
@@ -57,6 +60,12 @@ public class BoardServiceImpl implements BoardService {
 	public int selectOneCount() {
 		// TODO Auto-generated method stub
 		return dao.selectOneCount();
+	}
+
+	@Override
+	public List<BoardVo> selectList(int currentPage, int limit) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

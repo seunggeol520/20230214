@@ -12,9 +12,18 @@
     #{boardOriginalFileName},
     #{boardRenameFileName},
     DEFAULT,
-    DEFAULT,
-    (SELECT NVL(MAX(BOARD_NUM), 0)+ 1 FROM BOARD),
-    DEFAULT,
+	<choose>
+		<when test="boardNum != 0">
+		   	(SELECT BOARD_LEVEL + 1 FROM BOARD WHERE BOARD_NUM = #{boardNum}),
+    		(SELECT BOARD_REF FROM BOARD WHERE BOARD_NUM = #{boardNum}),
+  			(SELECT BOARD_REPLY_SEQ + 1 FROM BOARD WHERE BOARD_NUM = #{boardNum}),
+		</when>
+		<otherwise>
+		    DEFAULT,
+		    (SELECT NVL(MAX(BOARD_NUM), 0)+ 1 FROM BOARD),
+		    DEFAULT,
+		</otherwise>
+	</choose>
     DEFAULT
 )
 </insert>
@@ -24,6 +33,21 @@
 	BOARD_TITLE = #{boardTitle},
 	BOARD_WRITER = #{boardWriter},
 	BOARD_CONTENT = #{boardContent},
+	<if test="boardOriginalFileName != null and boardOriginalFileName neq ''.toString()">
+		BOARD_ORIGINAL_FILENAME = #{boardOriginalFileName}
+	</if>
+	<if test="boardOriginalFileName.equals('')">
+		BOARD_ORIGINAL_FILENAME = NULL
+	</if>
+		BOARD_RENAME_FILENAME = 
+	<choose>
+		<when test="boardOriginalFileName != null and !boardOriginalFileName.equals('')">
+			#{boardRenameFileName},
+		</when>
+		<otherwise>
+			NULL,
+		</otherwise>
+	</choose>
 	BOARD_DATE = SYSDATE,
 	WHERE BOARD_NUM = #{boardNum}
 </update>
