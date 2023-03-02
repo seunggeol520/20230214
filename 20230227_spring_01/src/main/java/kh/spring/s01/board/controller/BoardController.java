@@ -1,5 +1,8 @@
 package kh.spring.s01.board.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,12 +25,27 @@ public class BoardController {
 	private BoardService service;
 	
 	private final static int BOARD_LIMIT = 5;
+	private final static int PAGE_LIMIT = 3;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView viewListBoard(ModelAndView mv) {
 		
 		int currentPage = 1;
+		int totalCnt = service.selectOneCount();
+		int totalPage = (totalCnt % BOARD_LIMIT == 0)?(totalCnt / BOARD_LIMIT):(totalCnt / BOARD_LIMIT) + 1;
+		int startPage = (currentPage % PAGE_LIMIT == 0)?
+				(currentPage / PAGE_LIMIT - 1) * PAGE_LIMIT + 1:
+				(currentPage / PAGE_LIMIT) * PAGE_LIMIT + 1
+				;
+		int endPage = (startPage + PAGE_LIMIT > totalPage)?
+				totalPage : (startPage + PAGE_LIMIT);
+		Map<String, Integer> map = new HashMap<String, Integer>();
 		
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("totalPage", totalPage);
+		map.put("totalCnt", totalCnt);
+		mv.addObject("pageInfo", map);
 		
 		mv.addObject("boardList", service.selectList(currentPage, BOARD_LIMIT));
 		mv.setViewName("bosrd/list");

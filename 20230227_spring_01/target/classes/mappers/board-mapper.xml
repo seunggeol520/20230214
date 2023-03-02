@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace="board"/>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
   
   <insert id="insert" parameterType="kh.spring.s01.board.model.vo.BoardVo">
 	INSERT INTO BOARD VALUES(
@@ -74,7 +73,16 @@
 </select>
 
 <select id="selectList" resultType="kh.spring.s01.board.model.vo.BoardVo">
-	SELECT * FROM BOARD 
+	select
+		BOARD_TITLE ,
+		BOARD_WRITER,
+		BOARD_CONTENT,
+		BOARD_DATE,
+		BOARD_LEVEL,
+		BOARD_REF,
+		BOARD_REPLY_SEQ,
+		BOARD_READCOUNT
+	from BOARD ORDER BY BOARD_REF DESC, BOARD_REPLY_SEQ ASC
 </select>
 
 <select id="selectOneCount" resultType="_int">
