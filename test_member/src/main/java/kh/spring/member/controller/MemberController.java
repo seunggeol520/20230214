@@ -32,16 +32,36 @@ public class MemberController {
 //		vo.setName("name");
 //		vo.setPasswd("passwd");
 		int result = service.insert(vo);
+		
+		if(result > 0) {
+			mv.setViewName("redirect:/");
+		} else {
+			mv.setViewName("redirect:/member/signUp");
+		}
+		
 		return mv;
 	}
 	
 	@GetMapping("/update")
-	public ModelAndView viewUpdate(ModelAndView mv) {
+	public ModelAndView viewUpdate(ModelAndView mv, String id) {
+		MemberVo vo = service.update(vo);
+		mv.setViewName("/member/update");
+		
 		return mv;
 	}
 	
 	@PostMapping("/update")
 	public ModelAndView update(ModelAndView mv, MemberVo vo) {
+		
+		int result = service.update(vo);
+		
+		if(result > 0) {
+			mv.setViewName("redirect:/");
+		} else {
+			mv.setViewName("redirect:/member/signUp");
+		}
+		
+		
 		return mv;
 	}
 	
