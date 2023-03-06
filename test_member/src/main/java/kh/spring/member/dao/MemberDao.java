@@ -15,8 +15,14 @@ public class MemberDao {
 	private SqlSession sqlSession;
 	
 	public int insert(MemberVo vo) {
-		
-		return sqlSession.insert("memberMapper.insertId", vo);
+		int result = -1;
+		try {
+			result = sqlSession.insert("memberMapper.insertId", vo);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	public int update(MemberVo vo) {
@@ -29,7 +35,7 @@ public class MemberDao {
 		return sqlSession.delete("memberMapper.deleteId", id);
 	}
 	
-	public int selectOne(String id) {
+	public MemberVo selectOne(String id) {
 		
 		return sqlSession.selectOne("memberMapper.selectOne", id);
 	}

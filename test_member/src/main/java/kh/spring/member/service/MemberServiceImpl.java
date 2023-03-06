@@ -2,7 +2,6 @@ package kh.spring.member.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kh.spring.member.dao.MemberDao;
@@ -28,7 +27,7 @@ public class MemberServiceImpl implements MemberService {
 		return dao.delete( id);
 	}
 	
-	public int selectOne(String id) {
+	public MemberVo selectOne(String id) {
 		
 		return dao.selectOne( id);
 	}
